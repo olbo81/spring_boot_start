@@ -3,6 +3,9 @@ package com.boleg.spring.springboot.spring_boot_start.service;
 import com.boleg.spring.springboot.spring_boot_start.dao.RoleRepository;
 import com.boleg.spring.springboot.spring_boot_start.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,5 +45,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role getByRoleName(String roleName) {
         return roleRepository.findByRole(roleName);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10);
     }
 }
